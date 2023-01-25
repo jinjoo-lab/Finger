@@ -1,1 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      physical_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    properties:
+      hibernate:
+        format_sql: true
+  datasource:
+      url: jdbc:mariadb://localhost:3306/toy
+      driver-class-name: org.mariadb.jdbc.Driver
+      username: root
+      password: jinjooone123!
 
