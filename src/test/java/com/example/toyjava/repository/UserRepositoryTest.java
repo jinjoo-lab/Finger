@@ -1,34 +1,51 @@
 package com.example.toyjava.repository;
 
-import com.example.toyjava.module.access.entity.Users;
-import com.example.toyjava.module.access.repository.UserRepository;
+import com.example.toyjava.module.account.entity.Userinfo;
+import com.example.toyjava.module.account.entity.Users;
+import com.example.toyjava.module.account.repository.UserInfoRepository;
+import com.example.toyjava.module.account.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @SpringBootTest
 public class UserRepositoryTest {
     @Autowired
     public UserRepository userRepository;
 
+    @Autowired
+    public UserInfoRepository userInfoRepository;
+
     @Test
-    void userRespositoryTest1()
+    void userTest()
     {
-        Users user = Users.builder().age(27).userId("Dami1997jin")
-                .userName("jinjooone").userPassword("DamiGood")
-                .createdAt(Date.valueOf(LocalDate.now())).build();
+        userRepository.deleteAll();
+        userInfoRepository.deleteAll();
 
-        System.out.println(user);
+        Users users = Users.builder()
+                .userId("damilove123")
+                .userName("kimdami")
+                .userPassword("damidami")
+                .age(27)
+                .build();
 
-        userRepository.save(user);
+        Userinfo userinfo = Userinfo.builder()
+                .address("Seoul")
+                .main_career("actor")
+                .sub_career("witch").build();
 
-        Users reUser = userRepository.findById(0);
+        users.setUserInfo(userinfo);
+        userInfoRepository.save(userinfo);
+        userRepository.save(users);
 
-        System.out.println(reUser);
+
+    }
+    @Test
+    void userRelationTest()
+    {
+        System.out.println(userInfoRepository.findById(7l).getUser());
     }
 }
