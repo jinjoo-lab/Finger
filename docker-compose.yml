@@ -5,6 +5,8 @@ services:
     image: mariadb:latest
     ports:
       - 3306:3306
+    volumes:
+      - ./db/initdb:/docker-entrypoint-initdb.d
     environment:
       TZ: Asia/Seoul
       MYSQL_HOST: mariadb
