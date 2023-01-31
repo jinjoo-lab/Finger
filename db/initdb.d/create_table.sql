@@ -17,4 +17,14 @@ create table toy.users(
     age int,
     created_at date,
     updated_at date
+);
+
+create table toy.pet(
+    id bigint auto_increment primary key ,
+    sex varchar(20),
+    name varchar(20),
+    species varchar(20),
+    category varchar(20),
+    user_id bigint ,
+    foreign key(user_id) references toy.users(id)
 )

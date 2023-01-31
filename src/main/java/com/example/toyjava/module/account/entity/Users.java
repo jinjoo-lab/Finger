@@ -8,6 +8,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.LinkedList;
+import java.util.List;
 
 
 @Entity
@@ -53,6 +55,9 @@ public class Users {
     @OneToOne
     @JoinColumn(name = "info_id")
     Userinfo userInfo;
+
+    @OneToMany(mappedBy = "user" , fetch = FetchType.EAGER)
+    List<Pet> list = new LinkedList<>();
     @Builder
     public Users(int age,String userName,String userId, String userPassword,Userinfo userInfo)
     {
